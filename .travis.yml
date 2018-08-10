@@ -1,18 +1,19 @@
 language: python
 python:
-- '3.6'
+  - '3.6'
 dist: xenial
 before_install:
-- sudo apt-get install -y fuse
+  - sudo apt-get install -y fuse
 install:
-- pip install fusepy pyinstaller
+  - pip install fusepy pyinstaller
 script:
-- pyinstaller -F ./fakelistfuse.py
+  - pyinstaller -F ./fakelistfuse.py
+  - gzip -9 dist/fakelistfuse
 deploy:
   provider: releases
   api_key:
     secure: a3iwRRikOSd7ZULimo1KYKeh9SK3DeRcvugT12TyvYvzQPYF9Kp0Z+4UC0HG3KRYVjIsxgeBzon/9b9vMrt2jjNA9Ry9mOH37jg57ZPjd/dqtWVdORAdj9ES3PZ0580kCqQgs+B3VHevYjLEZp+kD7VJxBoi4br3b4rcmadaEptnnWQWe0J3TjfpPg+wD1M5bF/ni2332evGgfQNDrqutaZb6oDnmSMgK1nbU2/62i/ULjRGhbEwnN2Z/eq9JlPD9MzYz49hc8id1HbDaSNBzEoNiuicWsUtQcdRcDUDPyqU+fXyq4pDGzXqT10BrmNjeT5tROKRezCcwRadpEjlg2SrB57s3vWPfuWOzvCkMNHXeCy1aS0XR9w6ZmJuUYhpRdcr16DkKMyVvoJNXC5Ck1mAq7hjYVP63RNl+L6qFP+eaFbll/PVnamTYZgpIHTVCOajVHZfkV4M1E/3ombpeKzR472XCljpvaE6Bj74kz3f9CeASjyRoxpcIfqo7p/1bSOQ/dScZ1pzzXlcSDTzhQLNDkAo/Cf2cQFCbIUz2ZClMUWb/YUyuVe5x8wmSGLds75aiDqjH6BoVWIPRmBzjKrXtyEhHlawlFLkbOkxxLSKnvHDpbtaP9yCk2XNIedY6V3bxwbgS5MHhss3iA0DqtMHL4IBZeGKXlry+w9EbdA=
-  file: dist/fakelistfuse
+  file: dist/fakelistfuse.gz
   skip_cleanup: true
   on:
     repo: bylevel/fakelistfuse
