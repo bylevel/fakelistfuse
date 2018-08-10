@@ -1,0 +1,12 @@
+language: python
+python:
+  - "3.6"
+
+before_install:
+  - sudo apt-get install -y fuse
+
+install:
+  - pip install fusepy pyinstaller
+
+script:
+  - pyinstaller -F ./cachelist.py
