@@ -200,7 +200,7 @@ if __name__ == '__main__':
         fuse = FUSE(
             Memory(args.cache_file),
             args.mountpoint,
-            foreground=True,
+            foreground=True if args.debug else False,
             allow_other=True)
 
     if args.which == 'build':
