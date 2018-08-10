@@ -15,55 +15,17 @@ if not hasattr(__builtins__, 'bytes'):
     bytes = str
 
 
-class Memory(LoggingMixIn, Operations):
-    'Example memory filesystem. Supports only one level of files.'
-
+class FakeList(LoggingMixIn, Operations):
     def __init__(self, cache_path):
         self.cache = pickle.load(open(cache_path, 'rb'))
+        print('读取缓存完成')
         self.fd = 1
-
-    def chmod(self, path, mode):
-        return 0
-
-    def chown(self, path, uid, gid):
-        # self.files[path]['st_uid'] = uid
-        # self.files[path]['st_gid'] = gid
-        pass
-
-    def create(self, path, mode):
-        return 0
 
     def getattr(self, path, fh=None):
         if path not in self.cache['stats']:
             raise FuseOSError(ENOENT)
 
         return self.cache['stats'][path]
-
-    def getxattr(self, path, name, position=0):
-        # attrs = self.cache['stats'][path].get('attrs', {})
-
-        # try:
-        #     return attrs[name]
-        # except KeyError:
-        #     return ''       # Should return ENOATTR
-        return ''
-
-    def listxattr(self, path):
-        # attrs = self.files[path].get('attrs', {})
-        # return attrs.keys()
-        return []
-
-    def mkdir(self, path, mode):
-        # self.files[path] = dict(
-        #     st_mode=(S_IFDIR | mode),
-        #     st_nlink=2,
-        #     st_size=0,
-        #     st_ctime=time(),
-        #     st_mtime=time(),
-        #     st_atime=time())
-
-        # self.files['/']['st_nlink'] += 1
-        pass
 
     def open(self, path, flags):
         self.fd += 1
@@ -82,46 +44,8 @@ class Memory(LoggingMixIn, Operations):
     def readlink(self, path):
         return self.cache['stats'][path]['link']
 
-    def removexattr(self, path, name):
-        pass
-
-    def rename(self, old, new):
-        pass
-
-    def rmdir(self, path):
-        pass
-
-    def setxattr(self, path, name, value, options, position=0):
-        pass
-
     def statfs(self, path):
         return dict(f_bsize=512, f_blocks=4096, f_bavail=2048)
-
-    def symlink(self, target, source):
-        pass
-        # self.files[target] = dict(
-        #     st_mode=(S_IFLNK | 0o777),
-        #     st_nlink=1,
-        #     st_size=len(source))
-
-        # self.data[target] = source
-
-    def truncate(self, path, length, fh=None):
-        # make sure extending the file fills in zero bytes
-        # self.data[path] = self.data[path][:length].ljust(
-        #     length, '\x00'.encode('ascii'))
-        # self.files[path]['st_size'] = length
-        pass
-
-    def unlink(self, path):
-        pass
-
-    def utimens(self, path, times=None):
-        pass
-
-    def write(self, path, data, offset, fh):
-        pass
-        return 0
 
 
 def stat_to_dict(s):
@@ -144,6 +68,10 @@ def build_cache(dir_path, cache_file):
         'dirs': {},
         'stats': {},
     }
+
+    # 删除结尾的 /
+    if dir_path.endswith('/') and dir_path != '/':
+        dir_path = dir_path[:-1]
 
     dir_count = 0
     file_count = 0
@@ -198,7 +126,7 @@ if __name__ == '__main__':
         logging.basicConfig(
             level=logging.DEBUG if args.debug else logging.INFO)
         fuse = FUSE(
-            Memory(args.cache_file),
+            FakeList(args.cache_file),
             args.mountpoint,
             foreground=True if args.debug else False,
             allow_other=True)
