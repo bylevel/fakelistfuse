@@ -14,6 +14,7 @@ fusepy = "*"
 [dev-packages]
 "flake8" = "*"
 yapf = "*"
+pyinstaller = "*"
 
 [requires]
 python_version = "3.6"

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3f3cebd27808ccd42b7b6cb203bed7c41bfb8a534d65058933b8757ecbeb13b8"
+            "sha256": "2dafc26ffff8ea099f3360d89cef49916716735319600da696db40ddaddf0b1a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +31,13 @@
         }
     },
     "develop": {
+        "altgraph": {
+            "hashes": [
+                "sha256:d6814989f242b2b43025cba7161fc1b8fb487a62cd49c49245d6fd01c18ac997",
+                "sha256:ddf5320017147ba7b810198e0b6619bd7b5563aa034da388cea8546b877f9b0c"
+            ],
+            "version": "==0.16.1"
+        },
         "flake8": {
             "hashes": [
                 "sha256:7253265f7abd8b313e3892944044a365e3f4ac3fcdcfb4298f55ee9ddf188ba0",
@@ -39,12 +46,31 @@
             "index": "pypi",
             "version": "==3.5.0"
         },
+        "future": {
+            "hashes": [
+                "sha256:e39ced1ab767b5936646cedba8bcce582398233d6a627067d4c6a454c90cfedb"
+            ],
+            "version": "==0.16.0"
+        },
+        "macholib": {
+            "hashes": [
+                "sha256:9485686b89d357f4a99fda5a12349b261ecf2baedd526d2c9b6397167a507e90",
+                "sha256:a8941ff2cf2519859ed64d1248782442c98f5e1e28a1c331911d5501f74b7b37"
+            ],
+            "version": "==1.10"
+        },
         "mccabe": {
             "hashes": [
                 "sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42",
                 "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"
             ],
             "version": "==0.6.1"
+        },
+        "pefile": {
+            "hashes": [
+                "sha256:675c35ee0e1677db9e80d2f48d8a7ff2cf38e6207e8cd5e2a2c6d126db025854"
+            ],
+            "version": "==2017.11.5"
         },
         "pycodestyle": {
             "hashes": [
@@ -59,6 +85,13 @@
                 "sha256:8d616a382f243dbf19b54743f280b80198be0bca3a5396f1d2e1fca6223e8805"
             ],
             "version": "==1.6.0"
+        },
+        "pyinstaller": {
+            "hashes": [
+                "sha256:715f81f24b1ef0e5fe3b3c71e7540551838e46e9de30882aa7c0a521147fd1ce"
+            ],
+            "index": "pypi",
+            "version": "==3.3.1"
         },
         "yapf": {
             "hashes": [
