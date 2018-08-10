@@ -3,10 +3,17 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+verify_ssl = true
+name = "aliyun"
+
 [packages]
 fusepy = "*"
 
 [dev-packages]
+"flake8" = "*"
+yapf = "*"
 
 [requires]
 python_version = "3.6"
